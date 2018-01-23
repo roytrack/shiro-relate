@@ -70,4 +70,30 @@ public class LoginLogoutTest {
         subject.logout();
 
     }
+
+
+    @Test
+    public void testRealmMulti(){
+        //获取SecurityManage工厂 用ini初始化
+        Factory<SecurityManager> factory=new IniSecurityManagerFactory("classpath:shiro-multi-realm.ini");
+        SecurityManager securityManager =factory.getInstance();
+        SecurityUtils.setSecurityManager(securityManager);
+        Subject subject=SecurityUtils.getSubject();
+        UsernamePasswordToken token=new UsernamePasswordToken("ruan","123");
+
+        try{
+            subject.login(token);
+        }catch (AuthenticationException e){
+            e.printStackTrace();
+            System.out.println("登录失败");
+        }
+
+
+        Assert.assertEquals(true,subject.isAuthenticated());
+
+        subject.logout();
+
+    }
+
+
 }

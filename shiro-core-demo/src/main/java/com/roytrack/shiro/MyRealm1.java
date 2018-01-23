@@ -7,10 +7,10 @@ import org.apache.shiro.realm.Realm;
  *
  *   Created by roytrack on 2018-01-20  20:14
  */
-public class MyRealm implements Realm {
+public class MyRealm1 implements Realm {
     @Override
     public String getName() {
-        return "myrealm";
+        return "myrealm1";
     }
 
     @Override
@@ -21,7 +21,7 @@ public class MyRealm implements Realm {
     @Override
     public AuthenticationInfo getAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String userName=(String)authenticationToken.getPrincipal();
-        String password=String.copyValueOf((char[]) authenticationToken.getCredentials());
+        String password=new String((char[]) authenticationToken.getCredentials());
         if(!"roy".equals(userName)){
             throw new UnknownAccountException();
         }
