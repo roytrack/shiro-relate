@@ -21,7 +21,7 @@ public class MyRealm implements Realm {
     @Override
     public AuthenticationInfo getAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String userName=(String)authenticationToken.getPrincipal();
-        String password=(String)authenticationToken.getCredentials();
+        String password=String.copyValueOf((char[]) authenticationToken.getCredentials());
         if(!"roy".equals(userName)){
             throw new UnknownAccountException();
         }
